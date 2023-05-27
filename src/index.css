@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HEADER ---------- */
+nav{
+  padding: 0.8rem 0;
+  background-color: whitesmoke;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.container{
+  padding: 0 1.5rem;
+  margin: 0 auto;
+
+}
+div a{
+  text-decoration: none;
+  color: rgb(68, 68, 68);
+}
+.header__bar a{
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  font-weight: 'Poppins', sans-serif;;
+}
+.logo__bar{
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+.header__bar{
+  display: flex;
+  flex: 1;
+}
+.header__options{
+  display: flex;
+  align-items: center;
+}
+
+.header__options li .product__listing{
+  font-size: 1.2rem;
+  line-height: 1.5;
+  border-bottom: 2px solid;
+}
+.header__options li {
+  margin: 0 0.3rem;
+  list-style: none;
+}
+
+.cart__menu
+
+{
+  position: relative;
+  display: block;
+  background-color: rgb(211, 210, 210);
+  width: 100%;
+  padding: 0.3rem;
+  border-radius: 4px;
+  color: black;
+  line-height: 1.5;
+}
+.cart__menu span {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  color: black;
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+
+
+  .header__options .list__product{
+    display: none;
+  }
+}
+
+
+/*-------------- HOME------------- */
+
+/* ---SEARCH---BAR---- */
+.sidebar__product_search{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 15px;
+}
+.search__btn{
+  width: 40px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+}
+.filter__btn{
+  width: 40px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  display: none;
+}
+
+/* -----PRODCTS-----SIDEBAR------ */
+.prodct__home{
+  display: flex;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+.product__filter{
+  width: 30%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+}
+.all__products{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2rem;
+}
+
+/* -----CART------ */
+
+.total__amount{
+  padding:20px 0px 0px 10px;
+  border-top:2px solid grey;
+}
+
+/* -----PRODUCS---- */
+
+.product__card{
+  background-color:#f2f2f2;
+  padding: 10px 20px;
+}
+
+.product__name{
+ position: absolute;
+ z-index: auto;
+}
+.product__img{
+  width:100%;
+  height:200px;
+}
+.card__footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid; */
+  margin-top: 1rem;
+
+}
+.product__btn{
+    width: 100px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    /* margin-top: 15px; */
+
+}
+.product__price{
+  display: flex;
+  align-items: center;
+}
+
+.product__condition{
+ color: black;
+ margin-top: 15px;
+}
+.product__condition_btn{
+    width: 35px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.adjacent__btns{
+    width: 35px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.products__counter{
+    padding: 6px 7px;
+    background-color: black;
+    color: white;
+}
+
+/* -------CART--PRODCTS-------- */
+
+.cart__container{
+  display: flex;
+  gap: 1rem;
+}
+.cart__img{
+  width:150px;
+  height:150px;
+}
+.cart__prodcts_details{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+.prodct__name{
+  margin: 0;
+}
+.prodcts__price{
+  margin: 0;
+}
+.cart__options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart__btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cart__btn{
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: white;
+    border: 0.5px solid grey;
+    cursor: pointer !important,
+}
