@@ -4,7 +4,7 @@ import Product from "../components/Product"
 import { useEffect, useState } from 'react';
 import { fetchFromAPI, searchItems } from "../utils/fetchFromAPI"
 
-function Home() {
+const Home = () => {
  
     const [data, setData] = useState([]);
     const [query, setQuery] = useState("");
@@ -58,6 +58,40 @@ function Home() {
         }
     }
 
+    const filterProductByPrice = (e) => {
+        const {checked, value} = e.target
+
+        if(checked){
+            let price = value.trim().split("-")
+            if(price.length > 1){
+
+                let matchPrice = data.filter((item) =>{
+                    return item.price >= price[0] && item.price <= price[1]
+                })
+                setData(matchPrice)
+            } else{
+                let matchPrice = data.filter((item) => item.price >= 401)
+                setData(matchPrice)
+            }
+        } else{
+            setData(filterProduct)
+        }
+    }
+
+
+    const filterProductByType = (e) => {
+        const { checked, value } = e.target
+
+        if(checked){
+            const matchType = data.filter((item) => {
+                return item.type === value
+            })
+            setData(matchType)
+        } else{
+            setData(filterProduct)
+        }
+    }
+
 
 return (
   <div>
@@ -72,9 +106,9 @@ return (
               <h3>Colour</h3>
               <input type="checkbox" name='color' value="Red" onChange={filterProductByColor} /> <span>Red</span>
               <br />
-              <input type="checkbox" name='color' value="blue" onChange={filterProductByColor} /> <span>Blue</span>
+              <input type="checkbox" name='color' value="Blue" onChange={filterProductByColor} /> <span>Blue</span>
               <br />
-              <input type="checkbox" name='color' value="green" onChange={filterProductByColor} /> <span>Green</span>
+              <input type="checkbox" name='color' value="Green" onChange={filterProductByColor} /> <span>Green</span>
           </div>
           <div>
               <h3>Gender</h3>
@@ -84,19 +118,19 @@ return (
           </div>
           <div>
               <h3>Price</h3>
-              <input type="checkbox" /> <span>0 - Rs250</span>
+              <input type="checkbox" value="0-250" onChange={filterProductByPrice}/> <span>0 - Rs250</span>
               <br />
-              <input type="checkbox" /> <span>Rs251 - Rs400</span>
+              <input type="checkbox" value="251-400" onChange={filterProductByPrice}/> <span>Rs251 - Rs400</span>
               <br />
-              <input type="checkbox" /> <span>Rs450</span>
+              <input type="checkbox" value="450" onChange={filterProductByPrice}/> <span>Rs450</span>
           </div>
           <div>
               <h3>Type</h3>
-              <input type="checkbox" /> <span>Polo</span>
+              <input type="checkbox" value="Polo" onChange={filterProductByType} /> <span>Polo</span>
               <br />
-              <input type="checkbox" /> <span>Hoodie</span>
+              <input type="checkbox" value="Hoodie" onChange={filterProductByType} /> <span>Hoodie</span>
               <br />
-              <input type="checkbox" /> <span>Basic</span>
+              <input type="checkbox" value="Basic" onChange={filterProductByType} /> <span>Basic</span>
           </div>
 
       </div>

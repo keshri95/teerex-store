@@ -1,9 +1,10 @@
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "./context/context";
 
-function Header() {
+const Header = () => {
   
-     
+    const {product} = useGlobalContext()
 
   return (
     <nav>
@@ -18,7 +19,7 @@ function Header() {
             </li>
             <li>
               <Link to="/cart" className="cart__menu">
-                <span>10</span>
+                <span>{product.length}</span>
                 <AiOutlineShoppingCart size={30} />
               </Link>
             </li>
