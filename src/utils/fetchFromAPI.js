@@ -1,4 +1,4 @@
-const BASE_URL = "https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json";
+const BASE_URL = import.meta.env.VITE_API_KEY
 
 
 
