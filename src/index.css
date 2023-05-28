@@ -7,6 +7,15 @@
   box-sizing: border-box;
 }
 
+.home__container{
+  margin: 0 1rem;
+  padding: 0 1rem;
+}
+.spacing__cart_products{
+  padding: 0.4rem;
+  margin: 0.2rem;
+}
+
 /* HEADER ---------- */
 nav{
   padding: 0.8rem 0;
@@ -91,11 +100,13 @@ div a{
   margin-top: 15px;
 }
 .search__btn{
-  width: 40px;
+  width: 30px;
   height: 30px;
   border-radius: 5px;
-  background-color: gray;
+  background-color: black;
   color: white;
+  cursor: pointer;
+  border: none;
 }
 .filter__btn{
   width: 40px;
@@ -104,6 +115,7 @@ div a{
   background-color: black;
   color: white;
   display: none;
+  border: none;
 }
 
 /* -----PRODCTS-----SIDEBAR------ */
@@ -116,25 +128,95 @@ div a{
   width: 30%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 10px;
+  height: fit-content;
+}
+.filter__by_color,.filter__by_gender, .filter__by_price,.filter__by_type{
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: center;
+  margin-left: 5px !important;
+  margin: 5px 0;
+}
+input,span{
+  margin: 0 3px !important;
+}
+.filter__by_color .color,.gender, .price,.type{
+  margin: 3px 0;
 }
 .all__products{
   display: grid;
   grid-template-columns: repeat(3,1fr);
+  grid-template-rows: auto;
   gap: 2rem;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .product__filter{
+
+  }
+
+  .all__products {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: auto;
+    gap: 2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .filter__btn{
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    display: block;
+    border: none;
+  }
+  .product__filter{
+      display: none;
+  }
+
+
+  .all__products {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    gap: 2rem;
+    margin: 0 auto;
+ 
+  }
 }
 
 /* -----CART------ */
 
+
 .total__amount{
   padding:20px 0px 0px 10px;
   border-top:2px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* -----PRODUCS---- */
 
 .product__card{
-  background-color:#f2f2f2;
   padding: 10px 20px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-radius: 6px;
+}
+
+.product__card:hover{
+  max-width: 100%;
+  transform-origin: center;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .product__name{
@@ -144,23 +226,28 @@ div a{
 .product__img{
   width:100%;
   height:200px;
+  border-radius: 10px;
 }
 .card__footer{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid; */
   margin-top: 1rem;
 
 }
 .product__btn{
-    width: 100px;
-    height: 30px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    /* margin-top: 15px; */
+  width: 100px;
+  height: 30px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
 
+.product__btn:hover{
+  background-color:#5e5e5e;
+  transition: 0.7s;
 }
 .product__price{
   display: flex;
@@ -172,23 +259,36 @@ div a{
  margin-top: 15px;
 }
 .product__condition_btn{
-    width: 35px;
-    height: 30px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+  width: 35px;
+  height: 30px;
+  background-color: rgb(58, 58, 58);
+  color: white;
+  cursor: pointer;
 }
-.adjacent__btns{
-    width: 35px;
-    height: 30px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+.adjacent__btns_remove,.adjacent__btns_add{
+  width: 35px;
+  height: 30px;
+  background-color: rgb(77, 77, 77);
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.adjacent__btns_remove:hover{
+  background-color:#ad003a;
+  transition: 0.7s;
+}
+.adjacent__btns_add:hover{
+  background-color:#00ad4e;
+  transition: 0.7s;
 }
 .products__counter{
-    padding: 6px 7px;
-    background-color: black;
-    color: white;
+  padding: 6px 7px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 /* -------CART--PRODCTS-------- */
@@ -196,7 +296,18 @@ div a{
 .cart__container{
   display: flex;
   gap: 1rem;
+  margin: 3px 0;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
+
+.cart__container:hover{
+  max-width: 100%;
+  transform-origin: center;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
 .cart__img{
   width:150px;
   height:150px;
@@ -205,13 +316,14 @@ div a{
     display: flex;
     flex-direction:column;
     justify-content: center;
-    align-items: center;
-}
-.prodct__name{
-  margin: 0;
-}
-.prodcts__price{
-  margin: 0;
+    align-items: start;
+  }
+  .prodct__name{
+    
+  }
+  .prodcts__price{
+  align-items:center;
+  display: flex;
 }
 .cart__options{
     display: flex;
@@ -232,5 +344,51 @@ div a{
     border-radius: 5px;
     background-color: white;
     border: 0.5px solid grey;
-    cursor: pointer !important,
+    cursor: pointer !important;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .cart__container{
+    display: flex;
+    gap: 1rem;
+    margin: 3px 0;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+  }
+
+  .cart__container:hover{
+    max-width: 100%;
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  
+
+}
+
+@media only screen and (max-width: 600px) {
+  .cart__container{
+    /* border: 1px solid gray; */
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+    border-radius: 6px;
+  }
+
+  .cart__container:hover{
+    max-width: 100%;
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  
+
+
+
 }

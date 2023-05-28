@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useGlobalContext } from "./context/context";
+import { toast } from "react-hot-toast";
 
-// eslint-disable-next-line react/prop-types
 const Product = ({ elem }) => {
   const { product, setProduct } = useGlobalContext();
 
-  // eslint-disable-next-line react/prop-types
   const { imageURL, name, price, id } = elem;
 
   const addProduct = () => {
@@ -25,7 +25,8 @@ const Product = ({ elem }) => {
     if (Exist.length < 1 && elem.quantity > 0) {
       setProduct([...product, addedProducts]);
     } else if (elem.quantity === 0) {
-      alert("Out of Stock!!!");
+      // alert("Out of Stock!!!");
+      toast.error("Out of Stock!!!")
     }
 
   };
@@ -40,6 +41,7 @@ const Product = ({ elem }) => {
         return {
           ...item,
           quantity: item.quantity + amount,
+          
         };
       } else {
         return item;
@@ -50,8 +52,10 @@ const Product = ({ elem }) => {
 
   const handleIncrementAndAlert = () => {
     if (ExistCart[0].quantity >= elem.quantity) {
-      alert("You Reached Maximum Limit");
+      // alert("You Reached Maximum Limit");
+      toast.error("You Reached Maximum Limit")
     } else {
+      toast.success("Product has been added !!")
       addCounter(elem.id, +1);
     }
   };
@@ -62,7 +66,6 @@ const Product = ({ elem }) => {
       <img className="product__img" src={imageURL} alt={name} />
       <div className="card__footer">
         <h3 className="product__price">
-          {" "}
           <BsCurrencyRupee />
           {price}
         </h3>
@@ -73,15 +76,18 @@ const Product = ({ elem }) => {
         ) : (
           <div className="product__condition">
             <button
-              className="adjacent__btns"
-              onClick={() => addCounter(elem.id, -1)}
+              className="adjacent__btns_remove"
+              onClick={() => {
+                addCounter(elem.id, -1)
+                toast.error("Product has been removed")
+              }}
               disabled={ExistCart[0].quantity === 1}
             >
               -
             </button>
             <span className="products__counter">{ExistCart[0].quantity}</span>
             <button
-              className="adjacent__btns"
+              className="adjacent__btns_add"
               onClick={handleIncrementAndAlert}
             >
               +

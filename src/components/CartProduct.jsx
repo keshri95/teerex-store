@@ -1,5 +1,6 @@
 import { BsCurrencyRupee } from "react-icons/bs"
 import { useGlobalContext } from "./context/context";
+import { toast } from "react-hot-toast";
 
 const CartProduct = ({ elem, removeProduct }) => {
 
@@ -25,21 +26,22 @@ const CartProduct = ({ elem, removeProduct }) => {
       })
 
       setProduct(updateQty)
+
+      toast.success("Product has been added !!")
   }
 
 
 
   return (
     <div className="cart__container">
-      <div>
+
+      <div className="carts">
         <img
            className="cart__img"
         src={imageURL} alt={name} />
       </div>
       <div
-       className="cart__prodcts_details"
-     
-      >
+       className="cart__prodcts_details">
         <h3 className="prodct__name">{name}</h3>
         <h4 className="prodcts__price"> <BsCurrencyRupee size={20} />{price}</h4>
       </div>
@@ -62,9 +64,7 @@ const CartProduct = ({ elem, removeProduct }) => {
 
       </div>
       <div
-       className="cart__btns"
-    
-      >
+       className="cart__btns">
         <button
          className="cart__btn"
           onClick={() => removeProduct(id)}
