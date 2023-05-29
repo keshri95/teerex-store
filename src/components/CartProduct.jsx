@@ -53,7 +53,7 @@ const CartProduct = ({ elem, removeProduct }) => {
           {
             new Array(availableqty).fill(0).map((qty, i) =>(
               <option value={i+1} key={i}>
-              {i+1}
+              Qty{i+1}
             </option>
             ))
           }

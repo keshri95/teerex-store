@@ -3,12 +3,14 @@ import { TbFilter } from "react-icons/tb";
 import Product from "../components/Product";
 import { useEffect, useState } from "react";
 import { fetchFromAPI, searchItems } from "../utils/fetchFromAPI";
-
+import { RxCross2 } from "react-icons/rx"
 const Home = () => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
 
   const [filterProduct, setFilterProduct] = useState([]);
+
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
     fetchFromAPI()
@@ -85,10 +87,18 @@ const Home = () => {
     }
   };
 
+  const toggleSideBar = () => {
+    setToggle(!toggle)
+  }
+  const hideSidebar  = () =>{
+    setToggle(!toggle)
+  }
+
   return (
     <div className="home__container">
       <div className="sidebar__product_search">
         <input
+         className="search__bar"
           type="text"
           placeholder="Search for products..."
           value={query}
@@ -98,11 +108,14 @@ const Home = () => {
           <AiOutlineSearch />
         </button>
         <button className="filter__btn">
-          <TbFilter />
+          <TbFilter onClick={toggleSideBar} />
         </button>
       </div>
       <div className="prodct__home">
-        <div className="product__filter">
+        {
+          !toggle && (
+            <div className="product__filter">
+        <button className="close__btn" onClick={hideSidebar}><RxCross2 /></button>
           <div className="filter__by_color">
             <h3>Colour</h3>
             <div className="color">
@@ -212,6 +225,9 @@ const Home = () => {
             </div>
           </div>
         </div>
+          )
+        }
+        
 
         <div className="all__products">
           {data.length > 1 ? (
