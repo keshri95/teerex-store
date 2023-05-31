@@ -24,6 +24,7 @@ const Product = ({ elem }) => {
 
     if (Exist.length < 1 && elem.quantity > 0) {
       setProduct([...product, addedProducts]);
+      toast.success("Product has been added !!")
     } else if (elem.quantity === 0) {
       // alert("Out of Stock!!!");
       toast.error("Out of Stock!!!")
@@ -35,6 +36,7 @@ const Product = ({ elem }) => {
     return prod.id === elem.id;
   });
 
+  /*
   const addCounter = (id, amount) => {
     let updatedQty = product?.map((item) => {
       if (item.id === id) {
@@ -49,7 +51,17 @@ const Product = ({ elem }) => {
     });
     setProduct(updatedQty);
   };
+  */
 
+  const deleteProduct = (id) => {
+    let updatedProd = product?.filter((item) => {
+      return item.id !== id
+    })
+    setProduct(updatedProd)
+    toast.error("Product has been deleted!!")
+  }
+
+  /*
   const handleIncrementAndAlert = () => {
     if (ExistCart[0].quantity >= elem.quantity) {
       // alert("You Reached Maximum Limit");
@@ -59,6 +71,7 @@ const Product = ({ elem }) => {
       addCounter(elem.id, +1);
     }
   };
+  */
 
   return (
     <div className="product__card">
@@ -74,6 +87,12 @@ const Product = ({ elem }) => {
             Add to Cart
           </button>
         ) : (
+
+          <button className="product__btn_del" onClick={() =>deleteProduct(id)}>
+          Remove To Cart
+        </button>
+
+          /*
           <div className="product__condition">
             <button
               className="adjacent__btns_remove"
@@ -93,6 +112,7 @@ const Product = ({ elem }) => {
               +
             </button>
           </div>
+          */
         )}
       </div>
     </div>

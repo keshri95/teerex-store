@@ -61,9 +61,7 @@ div a{
   list-style: none;
 }
 
-.cart__menu
-
-{
+.cart__menu{
   position: relative;
   display: block;
   background-color: rgb(211, 210, 210);
@@ -143,11 +141,11 @@ div a{
   margin: 1rem;
 }
 .product__filter{
-  width: 30%;
+  width: 30% !important;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 10px;
   height: fit-content;
-  display: block !important;
+  /* display: block !important; */
 }
 .filter__by_color,.filter__by_gender, .filter__by_price,.filter__by_type{
   font-size: 1.1rem;
@@ -172,11 +170,15 @@ input,span{
   gap: 2rem;
 }
 
+.sidebar.visible {
+  display: block;
+}
 
 @media only screen and (max-width: 1000px) {
   .product__filter{
-
+    display: block !important;
   }
+
 
   .all__products {
     display: grid;
@@ -204,14 +206,19 @@ input,span{
     display: block;
     cursor: pointer;
   }
+
+
   .product__filter{
-    display: block;
+    display: none !important;
+  }
+
+  .product__filter.visible {
+    display: block !important;
     width: 30%;
     position: absolute;
     z-index: 100;
     background: rgb(255, 255, 255);
     border-radius: 6px;
-
   }
 
 
@@ -242,13 +249,18 @@ input,span{
     height: 20px;
   }
   .product__filter{
-    display: block;
+    display: none !important;
+  }
+
+  .product__filter.visible {
     width: 40%;
     position: absolute;
     z-index: 100;
     background: rgb(255, 255, 255);
     border-radius: 6px;
+    display: block !important;
   }
+
 }
 /* -----CART------ */
 
@@ -304,6 +316,20 @@ input,span{
   border: none;
   border-radius: 5px;
   text-transform:uppercase;
+}
+.product__btn_del{
+  width: 100px;
+  height: 30px;
+  background-color:#d62323;
+  transition: 0.7s;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  text-transform:uppercase;
+}
+.product__btn_del:hover{
+   background-color:#ad003a;
 }
 
 .product__btn:hover{
