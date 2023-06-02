@@ -24,26 +24,22 @@ const Product = ({ elem }) => {
 
     if (Exist.length < 1 && elem.quantity > 0) {
       setProduct([...product, addedProducts]);
-      toast.success("Product has been added !!")
+      toast.success("Product has been added !!");
     } else if (elem.quantity === 0) {
-      // alert("Out of Stock!!!");
-      toast.error("Out of Stock!!!")
+      toast.error("Out of Stock!!!");
     }
-
   };
 
   const ExistCart = product?.filter((prod) => {
     return prod.id === elem.id;
   });
 
-  /*
   const addCounter = (id, amount) => {
     let updatedQty = product?.map((item) => {
       if (item.id === id) {
         return {
           ...item,
           quantity: item.quantity + amount,
-          
         };
       } else {
         return item;
@@ -51,28 +47,34 @@ const Product = ({ elem }) => {
     });
     setProduct(updatedQty);
   };
-  */
 
-  const deleteProduct = (id) => {
-    let updatedProd = product?.filter((item) => {
-      return item.id !== id
-    })
-    setProduct(updatedProd)
-    toast.error("Product has been deleted!!")
-  }
-
-  /*
   const handleIncrementAndAlert = () => {
     if (ExistCart[0].quantity >= elem.quantity) {
-      // alert("You Reached Maximum Limit");
-      toast.error("You Reached Maximum Limit")
+      toast.error("You Reached Maximum Limit");
     } else {
-      toast.success("Product has been added !!")
+      toast.success("Product has been added !!");
       addCounter(elem.id, +1);
     }
   };
-  */
 
+  const removeProduct = () => {
+    const updatedQty = product.map((item) => {
+      if (item.id === elem.id) {
+        const updatedQuantity = item.quantity - 1;
+        return {
+          ...item,
+          quantity: updatedQuantity >= 0 ? updatedQuantity : 0,
+        };
+      }
+      return item;
+    });
+
+    const filteredProducts = updatedQty.filter((item) => item.quantity > 0);
+    setProduct(filteredProducts);
+    toast.error("Product has been removed");
+  };
+
+  
   return (
     <div className="product__card">
       <h3 className="product__name">{name}</h3>
@@ -83,24 +85,21 @@ const Product = ({ elem }) => {
           {price}
         </h3>
         {ExistCart.length < 1 ? (
-          <button className="product__btn" onClick={addProduct}>
+          <button
+            className="product__btn"
+            onClick={addProduct}
+            disabled={elem.quantity === 0}
+          >
             Add to Cart
           </button>
         ) : (
-
-          <button className="product__btn_del" onClick={() =>deleteProduct(id)}>
-          Remove To Cart
-        </button>
-
-          /*
           <div className="product__condition">
             <button
               className="adjacent__btns_remove"
               onClick={() => {
-                addCounter(elem.id, -1)
-                toast.error("Product has been removed")
+                removeProduct();
               }}
-              disabled={ExistCart[0].quantity === 1}
+              // disabled={ExistCart[0].quantity === 1}
             >
               -
             </button>
@@ -112,7 +111,6 @@ const Product = ({ elem }) => {
               +
             </button>
           </div>
-          */
         )}
       </div>
     </div>
