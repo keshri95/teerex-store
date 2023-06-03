@@ -74,9 +74,8 @@ const Product = ({ elem }) => {
     toast.error("Product has been removed");
   };
 
-  
   return (
-    <div className="product__card">
+    <article className="product__card">
       <h3 className="product__name">{name}</h3>
       <img className="product__img" src={imageURL} alt={name} />
       <div className="card__footer">
@@ -99,11 +98,10 @@ const Product = ({ elem }) => {
               onClick={() => {
                 removeProduct();
               }}
-              // disabled={ExistCart[0].quantity === 1}
             >
               -
             </button>
-            <span className="products__counter">{ExistCart[0].quantity}</span>
+            <data value={ExistCart[0].quantity} className="products__counter">{ExistCart[0].quantity}</data>
             <button
               className="adjacent__btns_add"
               onClick={handleIncrementAndAlert}
@@ -113,7 +111,7 @@ const Product = ({ elem }) => {
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 };
 

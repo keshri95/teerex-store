@@ -4,7 +4,7 @@ import { TbFilter } from "react-icons/tb";
 // eslint-disable-next-line react/prop-types
 const Search = ({ query, searchProdcut, setQuery, toggleSideBar, data }) => {
   return (
-    <div className="sidebar__product_search">
+    <form className="sidebar__product_search" onSubmit={(e) => searchProdcut(e.preventDefault())}>
       <input
         className="search__bar"
         type="text"
@@ -18,7 +18,7 @@ const Search = ({ query, searchProdcut, setQuery, toggleSideBar, data }) => {
       <button className="filter__btn">
         <TbFilter onClick={toggleSideBar} />
       </button>
-    </div>
+    </form>
   );
 };
 

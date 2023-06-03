@@ -1,127 +1,85 @@
-// import { RxCross2 } from "react-icons/rx";
+import { BsCurrencyRupee} from "react-icons/bs"
+const Sidebar = ({
+  filterProductByColor,
+  filterProductByGender,
+  filterProductByPrice,
+  filterProductByType,
+  toggle,
+  productColors,
+  selectedColors,
+  setSelectedColors,
+  productGender,
+  selectedGender,
+  setSelectedGender,
+  productPrice,
+  selectedPrice,
+  setSelectedPrice,
+  productType,
+  selectedType,
+  setSelectedType,
+}) => {
 
-// eslint-disable-next-line react/prop-types
-const Sidebar = ({ filterProductByColor,filterProductByGender,filterProductByPrice, filterProductByType,toggle  }) => {
   return (
-    <div className={`product__filter ${toggle ? "visible" : ""}`}>
-
-      {/* {!toggle && ( */}
-        {/* <div> */}
-          {/* <button className="close__btn" onClick={hideSidebar}>
-            <RxCross2 />
-          </button> */}
-          <div className="filter__by_color">
-            <h3>Colour</h3>
-            <div className="color">
-              <input
-                type="checkbox"
-                name="color"
-                value="Red"
-                onChange={filterProductByColor}
-              />
-              <span>Red</span>
-            </div>
-
-            <div className="color">
-              <input
-                type="checkbox"
-                name="color"
-                value="Blue"
-                onChange={filterProductByColor}
-              />
-              <span>Blue</span>
-            </div>
-            <div className="color">
-              <input
-                type="checkbox"
-                name="color"
-                value="Green"
-                onChange={filterProductByColor}
-              />
-              <span>Green</span>
-            </div>
-          </div>
-
-          <div className="filter__by_gender">
-            <h3>Gender</h3>
-            <div className="gender">
-              <input
-                type="checkbox"
-                name="gender"
-                value="Men"
-                onChange={filterProductByGender}
-              />
-              <span>Men</span>
-            </div>
-
-            <div className="gender">
-              <input
-                type="checkbox"
-                name="gender"
-                value="Women"
-                onChange={filterProductByGender}
-              />
-              <span>Women</span>
-            </div>
-          </div>
-          <div className="filter__by_price">
-            <h3>Price</h3>
-            <div className="price">
-              <input
-                type="checkbox"
-                value="0-250"
-                onChange={filterProductByPrice}
-              />
-              <span>0 - Rs250</span>
-            </div>
-            <div className="price">
-              <input
-                type="checkbox"
-                value="251-400"
-                onChange={filterProductByPrice}
-              />
-              <span>Rs251-Rs400</span>
-            </div>
-            <div className="price">
-              <input
-                type="checkbox"
-                value="450"
-                onChange={filterProductByPrice}
-              />
-              <span>Rs450</span>
-            </div>
-          </div>
-          <div className="filter__by_type">
-            <h3>Type</h3>
-            <div className="type">
-              <input
-                type="checkbox"
-                value="Polo"
-                onChange={filterProductByType}
-              />
-              <span>Polo</span>
-            </div>
-            <div className="type">
-              <input
-                type="checkbox"
-                value="Hoodie"
-                onChange={filterProductByType}
-              />
-              <span>Hoodie</span>
-            </div>
-            <div className="type">
-              <input
-                type="checkbox"
-                value="Basic"
-                onChange={filterProductByType}
-              />
-              <span>Basic</span>
-            </div>
-          </div>
-        {/* </div> */}
-      {/* )} */}
-     </div>
-
+    <aside className={`product__filter ${toggle ? "visible" : ""}`}>
+    <section className="filter__by_color">
+      <h3>Colour</h3>
+      {productColors?.map((color, index) => (
+        <div className="color" key={index}>
+          <input
+            type="checkbox"
+            name="color"
+            value={color}
+            onChange={filterProductByColor}
+            checked={selectedColors?.includes(color)}
+          />
+          <label htmlFor="color">{color}</label>
+        </div>
+      ))}
+    </section>
+    <section className="filter__by_gender">
+      <h3>Gender</h3>
+      {productGender?.map((gender, index) => (
+        <div className="gender" key={index}>
+          <input
+            type="checkbox"
+            name="gender"
+            value={gender}
+            onChange={filterProductByGender}
+            checked={selectedGender?.includes(gender)}
+          />
+          <label htmlFor="gender">{gender}</label>
+        </div>
+      ))}
+    </section>
+    <section className="filter__by_price">
+      <h3>Price</h3>
+      {productPrice?.map((price, index) => (
+        <div className="price" key={index}>
+          <input
+            type="checkbox"
+            value={price}
+            onChange={filterProductByPrice}
+            checked={selectedPrice === price}
+          />
+          <label htmlFor="price"> <BsCurrencyRupee /> {price}</label>
+        </div>
+      ))}
+    </section>
+    <section className="filter__by_type">
+      <h3>Type</h3>
+      {productType?.map((type, index) => (
+        <div className="type" key={index}>
+          <input
+            type="checkbox"
+            value={type}
+            onChange={filterProductByType}
+            checked={selectedType?.includes(type)}
+          />
+          <label htmlFor="type">{type}</label>
+        </div>
+      ))}
+    </section>
+  </aside>
   );
 };
 

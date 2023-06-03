@@ -17,7 +17,7 @@
 }
 
 /* HEADER ---------- */
-nav{
+header{
   padding: 0.8rem 0;
   background-color: whitesmoke;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
@@ -145,8 +145,8 @@ div a{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 10px;
   height: fit-content;
-  /* display: block !important; */
 }
+
 .filter__by_color,.filter__by_gender, .filter__by_price,.filter__by_type{
   font-size: 1.1rem;
   font-weight: 500;
@@ -157,11 +157,15 @@ div a{
   margin-left: 5px !important;
   margin: 5px 0;
 }
-input,span{
+input,label{
   margin: 0 3px !important;
+  align-items: center;
+  display: flex;
 }
-.filter__by_color .color,.gender, .price,.type{
+.filter__by_color .color,.gender,.price,.type{
   margin: 3px 0;
+  display: flex;
+  align-items: center;
 }
 .all__products{
   display: grid;
@@ -214,7 +218,7 @@ input,span{
 
   .product__filter.visible {
     display: block !important;
-    width: 30%;
+    width: 50%;
     position: absolute;
     z-index: 100;
     background: rgb(255, 255, 255);
@@ -253,7 +257,7 @@ input,span{
   }
 
   .product__filter.visible {
-    width: 40%;
+    width: 50% !important;
     position: absolute;
     z-index: 100;
     background: rgb(255, 255, 255);

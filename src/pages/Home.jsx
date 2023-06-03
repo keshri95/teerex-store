@@ -1,19 +1,24 @@
+/* eslint-disable no-unused-vars */
 import Product from "../components/Product";
 import { useEffect, useState } from "react";
-import { fetchFromAPI, searchItems } from "../utils/fetchFromAPI";
+import { fetchFromAPI } from "../utils/fetchFromAPI";
 import Search from "../components/Search";
 import Sidebar from "../components/Sidebar";
+import { productColors, productGender, productType, productPrice } from "../utils/filterOptions"; 
+
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
-
   const [filterProduct, setFilterProduct] = useState([]);
-
   const [toggle, setToggle] = useState(false);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedGender, setSelectedGender] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedType, setSelectedType] = useState([]);
 
   useEffect(() => {
-    fetchFromAPI()
+      fetchFromAPI()
       .then((res) => {
         setData(res);
         setFilterProduct(res);
@@ -35,81 +40,113 @@ const Home = () => {
     }
 }
 
-/*
-  const searchProdcut = () => {
-    let result = searchItems(data, query);
-    setData(result);
+const searchProduct = () => {
+  if (query.length > 0) {
+    const searchTerm = data?.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setData(searchTerm);
     setQuery("");
-  };
-  */
+  }
+};
 
-  const filterProductByColor = (e) => {
-    const { checked, value } = e.target;
+const filterProductByOptions = () => {
+  let filteredProducts = data;
+  if (selectedColors.length > 0) {
+    filteredProducts = filteredProducts?.filter((item) =>
+      selectedColors.includes(item.color)
+    );
+  }
 
-    if (checked) {
-      const matchColor = data.filter((item) => {
-        return item.color === value;
-      });
-      setData(matchColor);
+  if (selectedGender.length > 0) {
+    filteredProducts = filteredProducts?.filter((item) =>
+      selectedGender.includes(item.gender)
+    );
+  }
+
+  if (selectedPrice !== "") {
+    const priceRange = selectedPrice.trim().split("-");
+    if (priceRange.length > 1) {
+      filteredProducts = filteredProducts.filter(
+        (item) =>
+          item.price >= parseInt(priceRange[0]) &&
+          item.price <= parseInt(priceRange[1])
+      );
     } else {
-      setData(filterProduct);
+      filteredProducts = filteredProducts?.filter(
+        (item) => item.price >= parseInt(priceRange[0])
+      );
     }
-  };
+  }
 
-  const filterProductByGender = (e) => {
-    const { checked, value } = e.target;
+  if (selectedType.length > 0) {
+    filteredProducts = filteredProducts?.filter((item) =>
+      selectedType.includes(item.type)
+    );
+  }
 
-    if (checked) {
-      const matchGender = data.filter((item) => {
-        return item.gender === value;
-      });
-      setData(matchGender);
-    } else {
-      setData(filterProduct);
-    }
-  };
+  setData(filteredProducts);
+};
 
-  const filterProductByPrice = (e) => {
-    const { checked, value } = e.target;
+const filterProductByColor = (e) => {
+  const { checked, value } = e.target;
 
-    if (checked) {
-      let price = value.trim().split("-");
-      if (price.length > 1) {
-        let matchPrice = data.filter((item) => {
-          return item.price >= price[0] && item.price <= price[1];
-        });
-        setData(matchPrice);
-      } else {
-        let matchPrice = data.filter((item) => item.price >= 401);
-        setData(matchPrice);
-      }
-    } else {
-      setData(filterProduct);
-    }
-  };
+  if (checked) {
+    const updatedColors = [...selectedColors, value];
+    setSelectedColors(updatedColors);
+  } else {
+    const updatedColors = selectedColors?.filter((color) => color !== value);
+    setSelectedColors(updatedColors);
+    setData(filterProduct)
+  }
+};
 
-  const filterProductByType = (e) => {
-    const { checked, value } = e.target;
+const filterProductByGender = (e) => {
+  const { checked, value } = e.target;
 
-    if (checked) {
-      const matchType = data.filter((item) => {
-        return item.type === value;
-      });
-      setData(matchType);
-    } else {
-      setData(filterProduct);
-    }
-  };
+  if (checked) {
+    const updatedGender = [...selectedGender, value];
+    setSelectedGender(updatedGender);
+  } else {
+    const updatedGender = selectedGender?.filter((gender) => gender !== value);
+    setSelectedGender(updatedGender);
+    setData(filterProduct)
+  }
+};
+
+const filterProductByPrice = (e) => {
+  const { checked, value } = e.target;
+
+  if (checked) {
+    setSelectedPrice(value);
+  } else {
+    setSelectedPrice("");
+    setData(filterProduct)
+  }
+};
+
+const filterProductByType = (e) => {
+  const { checked, value } = e.target;
+
+  if (checked) {
+    const updatedType = [...selectedType, value];
+    setSelectedType(updatedType);
+  } else {
+    const updatedType = selectedType.filter((type) => type !== value);
+    setSelectedType(updatedType);
+    setData(filterProduct)
+  }
+};
 
   const toggleSideBar = () => {
     setToggle(!toggle);
-    console.log("toggle")
   };
-  /*
-  const hideSidebar = () => {
-    setToggle(!toggle);
-  };
-  */
+
+  useEffect(() => {
+    filterProductByOptions();
+  }, [selectedColors, selectedGender, selectedPrice, selectedType]);
+
 
   return (
     <div className="home__container">
@@ -121,139 +158,33 @@ const Home = () => {
         data={data}
       />
       <div className="prodct__home">
-        {/* {!toggle && (
-          <div className="product__filter">
-            <button className="close__btn" onClick={hideSidebar}>
-              <RxCross2 />
-            </button>
-            <div className="filter__by_color">
-              <h3>Colour</h3>
-              <div className="color">
-                <input
-                  type="checkbox"
-                  name="color"
-                  value="Red"
-                  onChange={filterProductByColor}
-                />
-                <span>Red</span>
-              </div>
-
-              <div className="color">
-                <input
-                  type="checkbox"
-                  name="color"
-                  value="Blue"
-                  onChange={filterProductByColor}
-                />
-                <span>Blue</span>
-              </div>
-              <div className="color">
-                <input
-                  type="checkbox"
-                  name="color"
-                  value="Green"
-                  onChange={filterProductByColor}
-                />
-                <span>Green</span>
-              </div>
-            </div>
-
-            <div className="filter__by_gender">
-              <h3>Gender</h3>
-              <div className="gender">
-                <input
-                  type="checkbox"
-                  name="gender"
-                  value="Men"
-                  onChange={filterProductByGender}
-                />
-                <span>Men</span>
-              </div>
-
-              <div className="gender">
-                <input
-                  type="checkbox"
-                  name="gender"
-                  value="Women"
-                  onChange={filterProductByGender}
-                />
-                <span>Women</span>
-              </div>
-            </div>
-            <div className="filter__by_price">
-              <h3>Price</h3>
-              <div className="price">
-                <input
-                  type="checkbox"
-                  value="0-250"
-                  onChange={filterProductByPrice}
-                />
-                <span>0 - Rs250</span>
-              </div>
-              <div className="price">
-                <input
-                  type="checkbox"
-                  value="251-400"
-                  onChange={filterProductByPrice}
-                />
-                <span>Rs251-Rs400</span>
-              </div>
-              <div className="price">
-                <input
-                  type="checkbox"
-                  value="450"
-                  onChange={filterProductByPrice}
-                />
-                <span>Rs450</span>
-              </div>
-            </div>
-            <div className="filter__by_type">
-              <h3>Type</h3>
-              <div className="type">
-                <input
-                  type="checkbox"
-                  value="Polo"
-                  onChange={filterProductByType}
-                />
-                <span>Polo</span>
-              </div>
-              <div className="type">
-                <input
-                  type="checkbox"
-                  value="Hoodie"
-                  onChange={filterProductByType}
-                />
-                <span>Hoodie</span>
-              </div>
-              <div className="type">
-                <input
-                  type="checkbox"
-                  value="Basic"
-                  onChange={filterProductByType}
-                />
-                <span>Basic</span>
-              </div>
-            </div>
-          </div>
-        )} */}
-         {/* {!toggle && ( */}
         <Sidebar
-          // hideSidebar={hideSidebar}
           filterProductByColor={filterProductByColor}
           filterProductByGender={filterProductByGender}
           filterProductByPrice={filterProductByPrice}
           filterProductByType={filterProductByType}
           toggle={toggle}
+          productColors={productColors}
+          selectedColors={selectedColors}
+          setSelectedColors={setSelectedColors}
+          productGender={productGender}
+          selectedGender={selectedGender}
+          setSelectedGender={setSelectedGender}
+          productPrice={productPrice}
+          selectedPrice={selectedPrice}
+          setSelectedPrice={setSelectedPrice}
+          productType={productType}
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
         />
-         {/* )} */}
 
-        <div className="all__products">
+        <section className="all__products">
           {data.length > 1 ? (
             data?.map((elem, id) => <Product key={id} elem={elem} />)
           ) : (
             <p>No match Found</p>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );

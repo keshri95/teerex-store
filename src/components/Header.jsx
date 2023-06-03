@@ -7,7 +7,7 @@ const Header = () => {
     const {product} = useGlobalContext()
 
   return (
-    <nav>
+    <header>
       <div className="container">
         <div className="logo__bar">
           <div className="header__bar">
@@ -26,7 +26,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
 
