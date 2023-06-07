@@ -3,7 +3,7 @@
     margin: 0 1rem;
     padding: 0 1rem;
 } */
-.product-home{
+.product-sidebar{
     display: flex;
     gap: 3rem;
     margin: 1rem;
@@ -19,8 +19,7 @@
   /* .product__filter{
     display: block !important;
   } */
-
-
+    
   .product-home {
     display: grid;
     grid-template-columns: repeat(2,1fr);

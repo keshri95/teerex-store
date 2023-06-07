@@ -159,7 +159,7 @@ const filterProductByType = (e) => {
         toggleSideBar={toggleSideBar}
         data={data}
       />
-      <div className="product-home">
+      <div className="product-sidebar">
         <Sidebar
           filterProductByColor={filterProductByColor}
           filterProductByGender={filterProductByGender}

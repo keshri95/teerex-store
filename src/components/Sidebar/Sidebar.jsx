@@ -22,7 +22,7 @@ const Sidebar = ({
 
   return (
     <aside className={`product-filter ${toggle ? "visible" : ""}`}>
-    <section className=" filter-section">
+    <section className="filter-section">
       <h3>Colour</h3>
       {productColors?.map((color, index) => (
         <div className="filter-item" key={index}>
