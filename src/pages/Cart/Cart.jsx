@@ -1,7 +1,8 @@
+import "./index.css";
 import { toast } from "react-hot-toast"
 import { BsCurrencyRupee } from "react-icons/bs";
-import CartProduct from "../components/CartProduct"
-import { useGlobalContext } from "../components/context/context"
+import CartProduct from "../../components/CartProduct/CartProduct"
+import { useGlobalContext } from "../../components/context/context"
 
 const Cart = ()  =>{
 
@@ -25,9 +26,9 @@ const Cart = ()  =>{
     
 
   return (
-    <div className="home__container">
-      <h1>Shopping Cart</h1>
-      <div className="spacing__cart_products">
+    <main className="home-container">
+        <h1>Shopping Cart</h1>
+      <section className="spacing-cart-products">
         {
           product?.map((elem, id) =>
             <CartProduct 
@@ -37,11 +38,11 @@ const Cart = ()  =>{
             />        
         )}
         
-      </div>
+      </section>
       <div className="cart__amount">
-        <h3 className="total__amount">Total Amount : <BsCurrencyRupee /> {totalReflectedAmt} </h3>
+        <h3 className="total-amount">Total Amount : <BsCurrencyRupee /> {totalReflectedAmt} </h3>
       </div>
-    </div>
+    </main>
   )
 }
 

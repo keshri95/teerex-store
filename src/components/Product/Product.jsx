@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
+import "./index.css"
 import { BsCurrencyRupee } from "react-icons/bs";
-import { useGlobalContext } from "./context/context";
+import { useGlobalContext } from "../context/context";
 import { toast } from "react-hot-toast";
 
 const Product = ({ elem }) => {

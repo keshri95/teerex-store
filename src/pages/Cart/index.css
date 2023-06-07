@@ -1,0 +1,12 @@
+.spacing-cart-products{
+  padding: 0.4rem;
+  margin: 0.2rem;
+}
+
+.total-amount{
+  padding:20px 0px 0px 10px;
+  border-top:2px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

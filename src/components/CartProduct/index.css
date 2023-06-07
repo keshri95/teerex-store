@@ -1,0 +1,99 @@
+.cart-container{
+    display: flex;
+    gap: 1rem;
+    margin: 3px 0;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  }
+  
+  .cart-container:hover{
+    max-width: 100%;
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  
+  .cart-img{
+    width:150px;
+    height:150px;
+  }
+  .cart-prodcts-details{
+      display: flex;
+      flex-direction: column;
+      margin-top: 1.7rem;
+    }
+   
+    .prodcts-price{
+    align-items:center;
+    display: flex;
+  }
+  .cart-options{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  select{
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  
+  
+  .cart-btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .cart-btn{
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border: 0.5px solid grey;
+    cursor: pointer !important;
+  }
+  
+  
+  @media only screen and (max-width: 1000px) {
+    .cart-container{
+      display: flex;
+      gap: 1rem;
+      margin: 3px 0;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  
+    }
+  
+    .cart-container:hover{
+      max-width: 100%;
+      transform-origin: center;
+      transition: transform 0.4s ease-in-out;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+    
+  
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .cart-container{
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 5px auto;
+      border-radius: 6px;
+    }
+  
+    .cart-container:hover{
+      max-width: 100%;
+      transform-origin: center;
+      transition: transform 0.4s ease-in-out;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+  }

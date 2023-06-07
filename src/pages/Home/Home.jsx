@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
-import Product from "../components/Product";
+import "./index.css";
+import Product from "../../components/Product/Product";
 import { useEffect, useState } from "react";
-import { fetchFromAPI } from "../utils/fetchFromAPI";
-import Search from "../components/Search";
-import Sidebar from "../components/Sidebar";
-import { productColors, productGender, productType, productPrice } from "../utils/filterOptions"; 
+import { fetchFromAPI } from "../../utils/fetchFromAPI";
+import Search from "../../components/Search/Search";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import { productColors, productGender, productType, productPrice } from "../../utils/filterOptions"; 
 
 
 const Home = () => {
@@ -28,7 +28,7 @@ const Home = () => {
       });
   }, []);
 
-  const searchProdcut = () => {
+  const searchProduct = () => {
     if(query.length > 0){
 
       const searchTerm = data?.filter((item) => {
@@ -38,8 +38,9 @@ const Home = () => {
     setData(searchTerm)
     setQuery("")
     }
-}
 
+}
+/*
 const searchProduct = () => {
   if (query.length > 0) {
     const searchTerm = data?.filter((item) =>
@@ -50,6 +51,7 @@ const searchProduct = () => {
     setQuery("");
   }
 };
+*/
 
 const filterProductByOptions = () => {
   let filteredProducts = data;
@@ -149,15 +151,15 @@ const filterProductByType = (e) => {
 
 
   return (
-    <div className="home__container">
+    <main className="home-container">
       <Search
         query={query}
-        searchProdcut={searchProdcut}
+        searchProduct={searchProduct}
         setQuery={setQuery}
         toggleSideBar={toggleSideBar}
         data={data}
       />
-      <div className="prodct__home">
+      <div className="product-home">
         <Sidebar
           filterProductByColor={filterProductByColor}
           filterProductByGender={filterProductByGender}
@@ -178,7 +180,7 @@ const filterProductByType = (e) => {
           setSelectedType={setSelectedType}
         />
 
-        <section className="all__products">
+        <section className="product-home">
           {data.length > 1 ? (
             data?.map((elem, id) => <Product key={id} elem={elem} />)
           ) : (
@@ -186,7 +188,7 @@ const filterProductByType = (e) => {
           )}
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

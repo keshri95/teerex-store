@@ -1,4 +1,5 @@
 import { BsCurrencyRupee} from "react-icons/bs"
+import "./index.css"
 const Sidebar = ({
   filterProductByColor,
   filterProductByGender,
@@ -20,11 +21,11 @@ const Sidebar = ({
 }) => {
 
   return (
-    <aside className={`product__filter ${toggle ? "visible" : ""}`}>
-    <section className="filter__by_color">
+    <aside className={`product-filter ${toggle ? "visible" : ""}`}>
+    <section className=" filter-section">
       <h3>Colour</h3>
       {productColors?.map((color, index) => (
-        <div className="color" key={index}>
+        <div className="filter-item" key={index}>
           <input
             type="checkbox"
             name="color"
@@ -36,10 +37,10 @@ const Sidebar = ({
         </div>
       ))}
     </section>
-    <section className="filter__by_gender">
+    <section className="filter-section">
       <h3>Gender</h3>
       {productGender?.map((gender, index) => (
-        <div className="gender" key={index}>
+        <div className="filter-item" key={index}>
           <input
             type="checkbox"
             name="gender"
@@ -51,10 +52,10 @@ const Sidebar = ({
         </div>
       ))}
     </section>
-    <section className="filter__by_price">
+    <section className="filter-section">
       <h3>Price</h3>
       {productPrice?.map((price, index) => (
-        <div className="price" key={index}>
+        <div className="filter-item" key={index}>
           <input
             type="checkbox"
             value={price}
@@ -65,10 +66,10 @@ const Sidebar = ({
         </div>
       ))}
     </section>
-    <section className="filter__by_type">
+    <section className="filter-section">
       <h3>Type</h3>
       {productType?.map((type, index) => (
-        <div className="type" key={index}>
+        <div className="filter-item" key={index}>
           <input
             type="checkbox"
             value={type}
