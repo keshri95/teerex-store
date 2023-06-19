@@ -1,10 +1,10 @@
-.product__card{
+.product-card{
     padding: 10px 20px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     border-radius: 6px;
   }
   
-  .product__card:hover{
+  .product-card:hover{
     max-width: 100%;
     transform-origin: center;
     transition: transform 0.4s ease-in-out;
@@ -12,25 +12,27 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
   
-  .product__name{
-   position: absolute;
+  .product-name{
    z-index: auto;
    font-weight: 500;
    font-size: 1.2rem;
   }
-  .product__img{
-    width:200px;  /* 100% */
+  .product-image{
+   
+  }
+  .product-img{
+    width:200px; 
     height:200px;
     border-radius: 10px;
   }
-  .card__footer{
+  .card-footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
   
   }
-  .product__btn{
+  .product-btn{
     width: 100px;
     height: 30px;
     background-color: black;
@@ -40,7 +42,7 @@
     border-radius: 5px;
     text-transform:uppercase;
   }
-  .product__btn_del{
+  .product-btn_del{
     width: 100px;
     height: 30px;
     background-color:#d62323;
@@ -51,31 +53,25 @@
     border-radius: 5px;
     text-transform:uppercase;
   }
-  .product__btn_del:hover{
+  .product-btn_del:hover{
      background-color:#ad003a;
   }
   
-  .product__btn:hover{
+  .product-btn:hover{
     background-color:#5e5e5e;
     transition: 0.7s;
   }
-  .product__price{
+  .product-price{
     display: flex;
     align-items: center;
   }
   
-  .product__condition{
+  .product-condition{
    color: black;
    margin-top: 15px;
   }
-  .product__condition_btn{
-    width: 35px;
-    height: 30px;
-    background-color: rgb(58, 58, 58);
-    color: white;
-    cursor: pointer;
-  }
-  .adjacent__btns_remove,.adjacent__btns_add{
+  
+  .adjacent-btns-remove,.adjacent-btns-add{
     width: 35px;
     height: 30px;
     background-color: rgb(77, 77, 77);
@@ -85,15 +81,15 @@
     border-radius: 5px;
   }
   
-  .adjacent__btns_remove:hover{
+  .adjacent-btns-remove:hover{
     background-color:#ad003a;
     transition: 0.7s;
   }
-  .adjacent__btns_add:hover{
+  .adjacent-btns-add:hover{
     background-color:#00ad4e;
     transition: 0.7s;
   }
-  .products__counter{
+  .products-counter{
     padding: 6px 7px;
     background-color: black;
     color: white;

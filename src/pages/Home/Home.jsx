@@ -1,11 +1,15 @@
 import "./index.css";
 import Product from "../../components/Product/Product";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchFromAPI } from "../../utils/fetchFromAPI";
 import Search from "../../components/Search/Search";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { productColors, productGender, productType, productPrice } from "../../utils/filterOptions"; 
-
+import {
+  productColors,
+  productGender,
+  productType,
+  productPrice,
+} from "../../utils/filterOptions";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -18,7 +22,7 @@ const Home = () => {
   const [selectedType, setSelectedType] = useState([]);
 
   useEffect(() => {
-      fetchFromAPI()
+    fetchFromAPI()
       .then((res) => {
         setData(res);
         setFilterProduct(res);
@@ -29,117 +33,105 @@ const Home = () => {
   }, []);
 
   const searchProduct = () => {
-    if(query.length > 0){
-
+    if (query.length > 0) {
       const searchTerm = data?.filter((item) => {
-        return item.name.toLowerCase().includes(query.toLowerCase())
-    })
+        return item.name.toLowerCase().includes(query.toLowerCase());
+      });
 
-    setData(searchTerm)
-    setQuery("")
+      setData(searchTerm);
+      setQuery("");
+    }
+  };
+
+  const filterProductByOptions = () => {
+    let filteredProducts = data;
+    if (selectedColors.length > 0) {
+      filteredProducts = filteredProducts?.filter((item) =>
+        selectedColors.includes(item.color)
+      );
     }
 
-}
-/*
-const searchProduct = () => {
-  if (query.length > 0) {
-    const searchTerm = data?.filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    setData(searchTerm);
-    setQuery("");
-  }
-};
-*/
-
-const filterProductByOptions = () => {
-  let filteredProducts = data;
-  if (selectedColors.length > 0) {
-    filteredProducts = filteredProducts?.filter((item) =>
-      selectedColors.includes(item.color)
-    );
-  }
-
-  if (selectedGender.length > 0) {
-    filteredProducts = filteredProducts?.filter((item) =>
-      selectedGender.includes(item.gender)
-    );
-  }
-
-  if (selectedPrice !== "") {
-    const priceRange = selectedPrice.trim().split("-");
-    if (priceRange.length > 1) {
-      filteredProducts = filteredProducts.filter(
-        (item) =>
-          item.price >= parseInt(priceRange[0]) &&
-          item.price <= parseInt(priceRange[1])
+    if (selectedGender.length > 0) {
+      filteredProducts = filteredProducts?.filter((item) =>
+        selectedGender.includes(item.gender)
       );
+    }
+
+    if (selectedPrice !== "") {
+      const priceRange = selectedPrice.trim().split("-");
+      if (priceRange.length > 1) {
+        filteredProducts = filteredProducts.filter(
+          (item) =>
+            item.price >= parseInt(priceRange[0]) &&
+            item.price <= parseInt(priceRange[1])
+        );
+      } else {
+        filteredProducts = filteredProducts?.filter(
+          (item) => item.price >= parseInt(priceRange[0])
+        );
+      }
+    }
+
+    if (selectedType.length > 0) {
+      filteredProducts = filteredProducts?.filter((item) =>
+        selectedType.includes(item.type)
+      );
+    }
+
+    setData(filteredProducts);
+  };
+
+  const filterProductByColor = (e) => {
+    const { checked, value } = e.target;
+
+    if (checked) {
+      const updatedColors = [...selectedColors, value];
+      setSelectedColors(updatedColors);
     } else {
-      filteredProducts = filteredProducts?.filter(
-        (item) => item.price >= parseInt(priceRange[0])
-      );
+      const updatedColors = selectedColors?.filter((color) => color !== value);
+      setSelectedColors(updatedColors);
+      setData(filterProduct);
     }
-  }
+  };
 
-  if (selectedType.length > 0) {
-    filteredProducts = filteredProducts?.filter((item) =>
-      selectedType.includes(item.type)
-    );
-  }
+  const filterProductByGender = (e) => {
+    const { checked, value } = e.target;
 
-  setData(filteredProducts);
-};
+    if (checked) {
+      const updatedGender = [...selectedGender, value];
+      setSelectedGender(updatedGender);
+    } else {
+      const updatedGender = selectedGender?.filter(
+        (gender) => gender !== value
+      );
+      setSelectedGender(updatedGender);
+      setData(filterProduct);
+    }
+  };
 
-const filterProductByColor = (e) => {
-  const { checked, value } = e.target;
+  const filterProductByPrice = (e) => {
+    const { checked, value } = e.target;
 
-  if (checked) {
-    const updatedColors = [...selectedColors, value];
-    setSelectedColors(updatedColors);
-  } else {
-    const updatedColors = selectedColors?.filter((color) => color !== value);
-    setSelectedColors(updatedColors);
-    setData(filterProduct)
-  }
-};
+    if (checked) {
+      setSelectedPrice(value);
+    } else {
+      setSelectedPrice("");
+      setData(filterProduct);
+    }
+  };
 
-const filterProductByGender = (e) => {
-  const { checked, value } = e.target;
+  const filterProductByType = (e) => {
+    const { checked, value } = e.target;
 
-  if (checked) {
-    const updatedGender = [...selectedGender, value];
-    setSelectedGender(updatedGender);
-  } else {
-    const updatedGender = selectedGender?.filter((gender) => gender !== value);
-    setSelectedGender(updatedGender);
-    setData(filterProduct)
-  }
-};
-
-const filterProductByPrice = (e) => {
-  const { checked, value } = e.target;
-
-  if (checked) {
-    setSelectedPrice(value);
-  } else {
-    setSelectedPrice("");
-    setData(filterProduct)
-  }
-};
-
-const filterProductByType = (e) => {
-  const { checked, value } = e.target;
-
-  if (checked) {
-    const updatedType = [...selectedType, value];
-    setSelectedType(updatedType);
-  } else {
-    const updatedType = selectedType.filter((type) => type !== value);
-    setSelectedType(updatedType);
-    setData(filterProduct)
-  }
-};
+    if (checked) {
+      const updatedType = [...selectedType, value];
+      setSelectedType(updatedType);
+    } else {
+      const updatedType = selectedType.filter((type) => type !== value);
+      setSelectedType(updatedType);
+      setData(filterProduct);
+    }
+  };
 
   const toggleSideBar = () => {
     setToggle(!toggle);
@@ -149,46 +141,43 @@ const filterProductByType = (e) => {
     filterProductByOptions();
   }, [selectedColors, selectedGender, selectedPrice, selectedType]);
 
-
   return (
-    <main className="home-container">
-      <Search
-        query={query}
-        searchProduct={searchProduct}
-        setQuery={setQuery}
-        toggleSideBar={toggleSideBar}
-        data={data}
-      />
-      <div className="product-sidebar">
-        <Sidebar
-          filterProductByColor={filterProductByColor}
-          filterProductByGender={filterProductByGender}
-          filterProductByPrice={filterProductByPrice}
-          filterProductByType={filterProductByType}
-          toggle={toggle}
-          productColors={productColors}
-          selectedColors={selectedColors}
-          setSelectedColors={setSelectedColors}
-          productGender={productGender}
-          selectedGender={selectedGender}
-          setSelectedGender={setSelectedGender}
-          productPrice={productPrice}
-          selectedPrice={selectedPrice}
-          setSelectedPrice={setSelectedPrice}
-          productType={productType}
-          selectedType={selectedType}
-          setSelectedType={setSelectedType}
+    <React.Fragment>
+      <main className="home-container">
+        <Search
+          query={query}
+          searchProduct={searchProduct}
+          setQuery={setQuery}
+          toggleSideBar={toggleSideBar}
+          data={data}
         />
+        <div className="product-sidebar">
+          <Sidebar
+            filterProductByColor={filterProductByColor}
+            filterProductByGender={filterProductByGender}
+            filterProductByPrice={filterProductByPrice}
+            filterProductByType={filterProductByType}
+            toggle={toggle}
+            productColors={productColors}
+            selectedColors={selectedColors}
+            productGender={productGender}
+            selectedGender={selectedGender}
+            productPrice={productPrice}
+            selectedPrice={selectedPrice}
+            productType={productType}
+            selectedType={selectedType}
+          />
 
-        <section className="product-home">
-          {data.length > 1 ? (
-            data?.map((elem, id) => <Product key={id} elem={elem} />)
-          ) : (
-            <p>No match Found</p>
-          )}
-        </section>
-      </div>
-    </main>
+          <section className="product-home">
+            {data.length > 1 ? (
+              data?.map((elem, id) => <Product key={id} elem={elem} />)
+            ) : (
+              <p>No match Found</p>
+            )}
+          </section>
+        </div>
+      </main>
+    </React.Fragment>
   );
 };
 

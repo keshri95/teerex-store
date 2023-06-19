@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
-import "./index.css"
+import "./index.css";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useGlobalContext } from "../context/context";
 import { toast } from "react-hot-toast";
+import React from "react";
 
 const Product = ({ elem }) => {
   const { product, setProduct } = useGlobalContext();
@@ -76,43 +76,49 @@ const Product = ({ elem }) => {
   };
 
   return (
-    <article className="product__card">
-      <h3 className="product__name">{name}</h3>
-      <img className="product__img" src={imageURL} alt={name} />
-      <div className="card__footer">
-        <h3 className="product__price">
-          <BsCurrencyRupee />
-          {price}
-        </h3>
-        {ExistCart.length < 1 ? (
-          <button
-            className="product__btn"
-            onClick={addProduct}
-            disabled={elem.quantity === 0}
-          >
-            Add to Cart
-          </button>
-        ) : (
-          <div className="product__condition">
+    <React.Fragment>
+      <article className="product-card">
+        <h3 className="product-name">{name}</h3>
+        <div className="product-image">
+          <img className="product-img" src={imageURL} alt={name} />
+        </div>
+        <div className="card-footer">
+          <h3 className="product-price">
+            <BsCurrencyRupee />
+            {price}
+          </h3>
+          {ExistCart.length < 1 ? (
             <button
-              className="adjacent__btns_remove"
-              onClick={() => {
-                removeProduct();
-              }}
+              className="product-btn"
+              onClick={addProduct}
+              disabled={elem.quantity === 0}
             >
-              -
+              Add to Cart
             </button>
-            <data value={ExistCart[0].quantity} className="products__counter">{ExistCart[0].quantity}</data>
-            <button
-              className="adjacent__btns_add"
-              onClick={handleIncrementAndAlert}
-            >
-              +
-            </button>
-          </div>
-        )}
-      </div>
-    </article>
+          ) : (
+            <div className="product-condition">
+              <button
+                className="adjacent-btns-remove"
+                onClick={() => {
+                  removeProduct();
+                }}
+              >
+                -
+              </button>
+              <data value={ExistCart[0].quantity} className="products-counter">
+                {ExistCart[0].quantity}
+              </data>
+              <button
+                className="adjacent-btns-add"
+                onClick={handleIncrementAndAlert}
+              >
+                +
+              </button>
+            </div>
+          )}
+        </div>
+      </article>
+    </React.Fragment>
   );
 };
 

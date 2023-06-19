@@ -41,7 +41,7 @@ div a {
   list-style: none;
 }
 
-.cart__menu {
+.cart-menu {
   position: relative;
   display: block;
   background-color: rgb(211, 210, 210);
@@ -51,7 +51,7 @@ div a {
   color: black;
   line-height: 1.5;
 }
-.cart__menu span {
+.cart-menu span {
   position: absolute;
   top: -5px;
   right: 0;
