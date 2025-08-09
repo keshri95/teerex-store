@@ -3,10 +3,13 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { useGlobalContext } from "../context/context";
 import { toast } from "react-hot-toast";
 import React from "react";
+import PropTypes from "prop-types";
 
 const CartProduct = ({ elem, removeProduct }) => {
   const { product, setProduct } = useGlobalContext();
   const { id, name, price, imageURL, availableqty, quantity } = elem;
+
+  // console.log(typeof removeProduct);
 
   const selectHandler = (e) => {
     const payload = e.target.value;
@@ -58,5 +61,10 @@ const CartProduct = ({ elem, removeProduct }) => {
     </React.Fragment>
   );
 };
+
+CartProduct.propTypes = {
+  elem: PropTypes.object,
+  removeProduct: PropTypes.func
+}
 
 export default CartProduct;

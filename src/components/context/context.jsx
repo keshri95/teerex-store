@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 
+import PropTypes from 'prop-types';
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [product, setProduct] = useState([])
-
 
 
   return (
@@ -15,6 +15,10 @@ const AppProvider = ({ children }) => {
       </AppContext.Provider>
     </>
   );
+};
+
+AppProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 const useGlobalContext = () => {

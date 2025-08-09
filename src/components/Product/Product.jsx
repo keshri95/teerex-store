@@ -3,9 +3,14 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { useGlobalContext } from "../context/context";
 import { toast } from "react-hot-toast";
 import React from "react";
+import PropTypes from "prop-types";
+
+
 
 const Product = ({ elem }) => {
   const { product, setProduct } = useGlobalContext();
+
+  // console.log(typeof elem);
 
   const { imageURL, name, price, id } = elem;
 
@@ -121,5 +126,9 @@ const Product = ({ elem }) => {
     </React.Fragment>
   );
 };
+
+Product.propTypes ={
+  elem: PropTypes.object
+}
 
 export default Product;

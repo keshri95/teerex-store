@@ -1,6 +1,8 @@
 import { BsCurrencyRupee } from "react-icons/bs";
 import "./index.css";
 import React from "react";
+import PropTypes from "prop-types";
+
 const Sidebar = ({
   filterProductByColor,
   filterProductByGender,
@@ -16,6 +18,8 @@ const Sidebar = ({
   productType,
   selectedType,
 }) => {
+  // console.log(typeof productColors);
+
   return (
     <React.Fragment>
       <aside className={`product-filter ${toggle ? "visible" : ""}`}>
@@ -83,6 +87,22 @@ const Sidebar = ({
       </aside>
     </React.Fragment>
   );
+};
+
+Sidebar.propTypes = {
+  filterProductByColor: PropTypes.func,
+  filterProductByGender: PropTypes.func,
+  filterProductByPrice: PropTypes.func,
+  filterProductByType: PropTypes.func,
+  toggle: PropTypes.bool,
+  productColors: PropTypes.array,
+  selectedColors: PropTypes.array,
+  productGender: PropTypes.array,
+  selectedGender: PropTypes.array,
+  productPrice: PropTypes.array,
+  selectedPrice: PropTypes.string,
+  productType: PropTypes.array,
+  selectedType: PropTypes.array,
 };
 
 export default Sidebar;

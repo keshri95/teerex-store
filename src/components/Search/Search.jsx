@@ -2,8 +2,11 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { TbFilter } from "react-icons/tb";
 import "./index.css";
 import React from "react";
+import PropTypes from "prop-types";
 
 const Search = ({ query, searchProduct, setQuery, toggleSideBar }) => {
+  // console.log(typeof toggleSideBar);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     searchProduct();
@@ -27,6 +30,13 @@ const Search = ({ query, searchProduct, setQuery, toggleSideBar }) => {
       </form>
     </React.Fragment>
   );
+};
+
+Search.propTypes = {
+  query: PropTypes.string,
+  searchProduct: PropTypes.func,
+  setQuery: PropTypes.func,
+  toggleSideBar: PropTypes.func,
 };
 
 export default Search;
